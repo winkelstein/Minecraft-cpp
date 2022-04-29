@@ -2,6 +2,9 @@
 #include "Engine/WS/Window.h"
 #include "Engine/Screen.h"
 #include "EventHandler.h"
+#include "Engine/FPSCounter.h"
+#include "Engine/GLTK/Shader.h"
+#include "Engine/Model.h"
 
 #ifdef _DEBUG
 #include "Engine/consolelogger.h"
@@ -17,6 +20,7 @@ namespace Minecraft
 		Engine::WS::Window* window;
 		Engine::Screen* screen;
 		Engine::logger logger;
+		Engine::Player* player;
 
 		bool inGame;
 

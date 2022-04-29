@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 
 #include "GLTK/Shader.h"
+#include "Render.h"
 
 namespace Engine
 {
@@ -14,6 +15,11 @@ namespace Engine
 		glm::mat4 model;
 
 	public:
-		virtual void draw(gltk::Shader& shader) const = 0;
+		virtual void draw(gltk::Shader& shader) const
+		{
+			shader.bind();
+			shader.uniform<glm::mat4>("model", this->model);
+			Renderer::render(this->VAO, count);
+		}
 	};
 }

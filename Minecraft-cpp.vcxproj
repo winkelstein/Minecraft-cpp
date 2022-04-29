@@ -151,6 +151,7 @@
     <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\consolelogger.h" />
     <ClInclude Include="Engine\drawable.h" />
+    <ClInclude Include="Engine\FPSCounter.h" />
     <ClInclude Include="Engine\GLTK\Framebuffer.h" />
     <ClInclude Include="Engine\GLTK\glContext.h" />
     <ClInclude Include="Engine\GLTK\GLObject.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Engine\GLTK\Texture.h" />
     <ClInclude Include="Engine\GLTK\UniformBuffer.h" />
     <ClInclude Include="Engine\Logger.h" />
+    <ClInclude Include="Engine\Model.h" />
     <ClInclude Include="Engine\Player.h" />
     <ClInclude Include="Engine\Render.h" />
     <ClInclude Include="Engine\Screen.h" />
@@ -173,11 +175,13 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Engine\Camera.cpp" />
+    <ClCompile Include="Engine\FPSCounter.cpp" />
     <ClCompile Include="Engine\GLTK\Framebuffer.cpp" />
     <ClCompile Include="Engine\GLTK\glContext.cpp" />
     <ClCompile Include="Engine\GLTK\Shader.cpp" />
     <ClCompile Include="Engine\GLTK\Texture.cpp" />
     <ClCompile Include="Engine\Logger.cpp" />
+    <ClCompile Include="Engine\Model.cpp" />
     <ClCompile Include="Engine\Player.cpp" />
     <ClCompile Include="Engine\Screen.cpp" />
     <ClCompile Include="Engine\WS\Keyboard.cpp" />
@@ -191,6 +195,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\minecraft.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\test\fragment.glsl" />
+    <None Include="shaders\test\vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

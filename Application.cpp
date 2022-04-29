@@ -15,27 +15,47 @@ Minecraft::Application::Application()
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(this->_debugfunc, &this->logger);
 
+	this->player = new Engine::Player("Steve");
+
 	this->inGame = true;
 }
 
 Minecraft::Application::~Application()
 {
+	delete this->player;
 	delete this->screen;
 	delete this->window;
 }
 
 void Minecraft::Application::run()
 {
+	Engine::FPSCounter counter;
 	while (this->window->isOpen())
 	{
-		Engine::WS::Event event;
-		while (this->window->pollEvent(event))
-			this->onAnyEvent(event);
+		counter.start();
+		{
+			//Events
+			Engine::WS::Event event;
+			while (this->window->pollEvent(event))
+				this->onAnyEvent(event);
+
+			//Logging
+			this->logger.flush();
 
 
-		this->window->swapBuffers();
-		this->window->clearColor(0.0, 0.0, 0.0, 1.0);
-		this->window->clear();
+			//Player process
+			this->player->process(counter.ticks());
+			this->screen->onUpdateCamera(this->player->camera());
+
+			//Draw things
+
+
+			this->screen->render();
+			this->window->swapBuffers();
+			this->window->clearColor(128.0 / 255.0, 166.0 / 255.0, 1, 1.0);
+			this->window->clear();
+		}
+		counter.end();
 	}
 }
 
@@ -84,7 +104,7 @@ void Minecraft::Application::onAnyEvent(const Engine::WS::Event& ev)
 		break;
 	case Event::EventType::KeyPressed:
 	case Event::EventType::KeyReleased:
-		EventHandler::onKeyboardInput(ev, this->inGame);
+		EventHandler::onKeyboardInput(ev, this->inGame, *this->player, *this->window);
 		break;
 	case Event::EventType::MouseMoved:
 	case Event::EventType::LeftMouseButtonPressed:
@@ -94,7 +114,7 @@ void Minecraft::Application::onAnyEvent(const Engine::WS::Event& ev)
 	case Event::EventType::MiddleMouseButtonPressed:
 	case Event::EventType::MiddleMouseButtonReleased:
 	case Event::EventType::WheelMouseScrolled:
-		EventHandler::onMouseInput(ev, this->inGame);
+		EventHandler::onMouseInput(ev, this->inGame, *this->player);
 		break;
 	}
 }

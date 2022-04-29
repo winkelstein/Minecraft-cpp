@@ -3,10 +3,10 @@
 
 namespace Engine
 {
-	class Render
+	class Renderer
 	{
 	public:
-		virtual void render(GLuint VAO, size_t count) const
+		static void render(GLuint VAO, size_t count)
 		{
 			glBindVertexArray(VAO);
 			glDrawArrays(GL_TRIANGLES, 0, count);

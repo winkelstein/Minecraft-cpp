@@ -9,7 +9,7 @@ namespace Minecraft
 	class EventHandler
 	{
 	public:
-		static void onKeyboardInput(const Engine::WS::Event& ev, bool& inGame, Engine::Player& player);
+		static void onKeyboardInput(const Engine::WS::Event& ev, bool& inGame, Engine::Player& player, Engine::WS::Window& window);
 		static void onMouseInput(const Engine::WS::Event& ev, bool& inGame, Engine::Player& player);
 		static void onClose(const Engine::WS::Event& ev, Engine::WS::Window& window);
 		static void onResize(const Engine::WS::Event& ev, Engine::Screen& scr);

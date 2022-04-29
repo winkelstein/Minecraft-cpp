@@ -1,9 +1,12 @@
 #include "EventHandler.h"
 
-void Minecraft::EventHandler::onKeyboardInput(const Engine::WS::Event& ev, bool& inGame, Engine::Player& player)
+void Minecraft::EventHandler::onKeyboardInput(const Engine::WS::Event& ev, bool& inGame, Engine::Player& player, Engine::WS::Window& window)
 {
 	if (Engine::WS::Keyboard::isButtonPressed(Engine::WS::Keyboard::VirtualKey::ESC))
+	{
 		inGame = !inGame;
+		Engine::WS::Mouse::clip(window, inGame);
+	}
 
 	if (inGame)
 		player.onKeyboardInput(ev);
