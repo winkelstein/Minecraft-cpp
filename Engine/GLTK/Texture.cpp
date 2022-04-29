@@ -1,13 +1,31 @@
 #include "Texture.h"
 
-Engine::gltk::Texture::Texture(const unsigned char* data, uint64_t width, uint64_t height, uint8_t nrChannels)
-{
-	glGenTextures(1, &this->handler);
-	this->bind();
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+Engine::gltk::Texture::Texture(std::filesystem::path path)
+{
+	stbi_set_flip_vertically_on_load(true);
+
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load(path.string().c_str(), &width, &height, &nrChannels, 0);
+
+	if (data)
+	{
+		glGenTextures(1, &this->handler);
+		glBindTexture(GL_TEXTURE_2D, this->handler);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		stbi_image_free(data);
+	}
+	else
+	{
+		stbi_image_free(data);
+		throw std::exception("Unable to create texture");
+	}
 }
 
 Engine::gltk::Texture::~Texture()
@@ -28,15 +46,4 @@ void Engine::gltk::Texture::bind() const
 void Engine::gltk::Texture::unbind() const
 {
 	glBindTexture(GL_TEXTURE_2D, NULL);
-}
-
-Engine::gltk::TextureColorBuffer::TextureColorBuffer(uint64_t width, uint64_t height) : Texture(NULL, width, height, 0)
-{
-	this->resize(width, height);
-}
-
-void Engine::gltk::TextureColorBuffer::resize(uint64_t width, uint64_t height)
-{
-	this->bind();
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 }

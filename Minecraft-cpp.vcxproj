@@ -152,7 +152,6 @@
     <ClInclude Include="Engine\consolelogger.h" />
     <ClInclude Include="Engine\drawable.h" />
     <ClInclude Include="Engine\FPSCounter.h" />
-    <ClInclude Include="Engine\GLTK\Framebuffer.h" />
     <ClInclude Include="Engine\GLTK\glContext.h" />
     <ClInclude Include="Engine\GLTK\GLObject.h" />
     <ClInclude Include="Engine\GLTK\Shader.h" />
@@ -176,7 +175,6 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Engine\Camera.cpp" />
     <ClCompile Include="Engine\FPSCounter.cpp" />
-    <ClCompile Include="Engine\GLTK\Framebuffer.cpp" />
     <ClCompile Include="Engine\GLTK\glContext.cpp" />
     <ClCompile Include="Engine\GLTK\Shader.cpp" />
     <ClCompile Include="Engine\GLTK\Texture.cpp" />
@@ -197,6 +195,8 @@
     <Image Include="res\minecraft.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="blocks\cube.mm" />
+    <None Include="README.md" />
     <None Include="shaders\test\fragment.glsl" />
     <None Include="shaders\test\vertex.glsl" />
   </ItemGroup>

@@ -14,8 +14,7 @@ Done:
 - [x] Event system
 - [x] Keyboard and Mouse classes
 - [x] UniformBuffer class
-- [x] Framebuffer class
-- [x] Texture class (without importing)
+- [x] Texture class
 - [x] Renderer 
 - [x] Player class (player unable to jump)
 - [x] Event handler
@@ -23,4 +22,3 @@ Done:
 Working on:
 - [ ] Model class
 - [ ] Player class (add jump)
-- [ ] Texture class (texture importing)
