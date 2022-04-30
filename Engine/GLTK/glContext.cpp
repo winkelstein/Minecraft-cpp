@@ -15,6 +15,16 @@ void Engine::gltk::_glContext::glContext::swapBuffers()
 	SwapBuffers(this->hdc);
 }
 
+void Engine::gltk::_glContext::glContext::clear()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Engine::gltk::_glContext::glContext::clearColor(float red, float green, float blue, float alpha)
+{
+	glClearColor(red, green, blue, alpha);
+}
+
 void Engine::gltk::_glContext::glContext::createContext(HWND window_handler)
 {
 	PIXELFORMATDESCRIPTOR pd;
