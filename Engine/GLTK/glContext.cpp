@@ -5,22 +5,22 @@ Engine::gltk::_glContext::glContext::~glContext()
 	wglDeleteContext(this->context);
 }
 
-void Engine::gltk::_glContext::glContext::makeContextCurrent()
+void Engine::gltk::_glContext::glContext::makeContextCurrent() const
 {
 	wglMakeCurrent(this->hdc, this->context);
 }
 
-void Engine::gltk::_glContext::glContext::swapBuffers()
+void Engine::gltk::_glContext::glContext::swapBuffers() const
 {
 	SwapBuffers(this->hdc);
 }
 
-void Engine::gltk::_glContext::glContext::clear()
+void Engine::gltk::_glContext::glContext::clear() const
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Engine::gltk::_glContext::glContext::clearColor(float red, float green, float blue, float alpha)
+void Engine::gltk::_glContext::glContext::clearColor(float red, float green, float blue, float alpha) const
 {
 	glClearColor(red, green, blue, alpha);
 }

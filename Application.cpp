@@ -90,6 +90,32 @@ void Minecraft::Application::window_init(std::string window_name, uint64_t width
 	this->screen = new Engine::Screen(Engine::WS::Size(width, height));
 }
 
+void Minecraft::Application::assets_init()
+{
+	try
+	{
+		Engine::Model* cube = new Engine::Model("blocks/cube.mm");
+		this->assets.store("cube", *cube);
+	}
+	catch (std::exception& e)
+	{
+		this->logger << Engine::Logger::message("Minecraft Model loading", e.what(), Engine::Logger::severity::high);
+	}
+
+	try
+	{
+		Engine::gltk::Shader* shader = new Engine::gltk::Shader;
+		shader->add(Engine::gltk::Shader::ShaderType::vertex, "shaders/test/vertex.glsl");
+		shader->add(Engine::gltk::Shader::ShaderType::fragment, "shaders/test/fragment.glsl");
+		shader->link();
+		this->assets.store("test", *shader);
+	}
+	catch (std::exception& e)
+	{
+		this->logger << Engine::Logger::message("Minecraft Shader loading", e.what(), Engine::Logger::severity::high);
+	}
+}
+
 void Minecraft::Application::onAnyEvent(const Engine::WS::Event& ev)
 {
 	using Engine::WS::Event;

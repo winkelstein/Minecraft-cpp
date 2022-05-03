@@ -5,6 +5,7 @@
 #include "Engine/FPSCounter.h"
 #include "Engine/GLTK/Shader.h"
 #include "Engine/Model.h"
+#include "Engine/Asset.h"
 
 #ifdef _DEBUG
 #include "Engine/consolelogger.h"
@@ -21,6 +22,7 @@ namespace Minecraft
 		Engine::Screen* screen;
 		Engine::logger logger;
 		Engine::Player* player;
+		Engine::Asset assets;
 
 		bool inGame;
 
@@ -36,6 +38,7 @@ namespace Minecraft
 
 	private:
 		void window_init(std::string window_name, uint64_t width, uint64_t height);
+		void assets_init();
 		void onAnyEvent(const Engine::WS::Event& ev);
 	};
 }

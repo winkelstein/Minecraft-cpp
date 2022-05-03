@@ -38,7 +38,7 @@ void Engine::WS::Mouse::position(const Position pos, const Window& relativeTo)
 
 void Engine::WS::Mouse::visibility(bool state)
 {
-    ShowCursor(state);
+    ShowCursor(state ? TRUE : FALSE);
 }
 
 void Engine::WS::Mouse::clip(const Window& window, bool state)
