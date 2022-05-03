@@ -18,6 +18,7 @@ Done:
 - [x] Renderer 
 - [x] Player class (player unable to jump)
 - [x] Event handler
+- [x] Asset loader
 
 Working on:
 - [ ] Model class
