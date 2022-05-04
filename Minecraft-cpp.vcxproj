@@ -149,6 +149,8 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Engine\Asset.h" />
+    <ClInclude Include="Engine\Block\Block.h" />
+    <ClInclude Include="Engine\Block\BlockImporter.h" />
     <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\consolelogger.h" />
     <ClInclude Include="Engine\drawable.h" />
@@ -174,6 +176,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Engine\Block\Block.cpp" />
+    <ClCompile Include="Engine\Block\BlockImporter.cpp" />
     <ClCompile Include="Engine\Camera.cpp" />
     <ClCompile Include="Engine\FPSCounter.cpp" />
     <ClCompile Include="Engine\GLTK\glContext.cpp" />

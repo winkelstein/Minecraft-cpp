@@ -50,15 +50,24 @@ template<> inline void Engine::Asset::store(std::string name, Engine::gltk::Shad
 
 template<> inline const Engine::Model& Engine::Asset::get(std::string name)
 {
-	return *this->models[name];
+	if (this->models.find(name) != this->models.end())
+		return *this->models[name];
+	else
+		throw std::exception("Model not found");
 }
 
 template<> inline const Engine::gltk::Texture& Engine::Asset::get(std::string name)
 {
-	return *this->textures[name];
+	if (this->textures.find(name) != this->textures.end())
+		return *this->textures[name];
+	else
+		throw std::exception("Texture not found");
 }
 
 template<> inline const Engine::gltk::Shader& Engine::Asset::get(std::string name)
 {
-	return *this->shaders[name];
+	if (this->shaders.find(name) != this->shaders.end())
+		return *this->shaders[name];
+	else
+		throw std::exception("Shader not found");
 }

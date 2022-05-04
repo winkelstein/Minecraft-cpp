@@ -9,6 +9,7 @@ Minecraft::Application::Application()
 	catch (std::exception& e)
 	{
 		this->logger << Engine::Logger::message("WinAPI", e.what(), Engine::Logger::severity::high);
+		exit(1);
 	}
 	this->logger << Engine::Logger::message("WinAPI", "window has been created");
 
@@ -18,6 +19,8 @@ Minecraft::Application::Application()
 	this->player = new Engine::Player("Steve");
 
 	this->inGame = true;
+
+	this->assets_init();
 }
 
 Minecraft::Application::~Application()
@@ -49,10 +52,9 @@ void Minecraft::Application::run()
 
 			//Draw things
 
-
 			this->screen->render();
 			this->window->swapBuffers();
-			this->window->clearColor(128.0 / 255.0, 166.0 / 255.0, 1, 1.0);
+			this->window->clearColor(128.0f / 255.0f, 166.0f / 255.0f, 1.0f, 1.0f);
 			this->window->clear();
 		}
 		counter.end();
@@ -100,7 +102,9 @@ void Minecraft::Application::assets_init()
 	catch (std::exception& e)
 	{
 		this->logger << Engine::Logger::message("Minecraft Model loading", e.what(), Engine::Logger::severity::high);
+		exit(1);
 	}
+	this->logger << Engine::Logger::message("Minecraft Model loading", "loaded");
 
 	try
 	{
@@ -113,7 +117,19 @@ void Minecraft::Application::assets_init()
 	catch (std::exception& e)
 	{
 		this->logger << Engine::Logger::message("Minecraft Shader loading", e.what(), Engine::Logger::severity::high);
+		exit(1);
 	}
+	this->logger << Engine::Logger::message("Minecraft Shader loading", "loaded");
+
+	try
+	{
+		this->block_importer = new Engine::BlockImporter(this->assets);
+	}
+	catch (std::exception& e)
+	{
+		this->logger << Engine::Logger::message("Minecraft Block importer loading", e.what(), Engine::Logger::severity::high);
+	}
+	this->logger << Engine::Logger::message("Minecraft Block importer loading", "loaded");
 }
 
 void Minecraft::Application::onAnyEvent(const Engine::WS::Event& ev)

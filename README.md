@@ -19,7 +19,11 @@ Done:
 - [x] Player class (player unable to jump)
 - [x] Event handler
 - [x] Asset loader
+- [x] Model class
+- [x] Block (haven't done yet)
+- [x] BlockImporter (haven't done yet)
 
 Working on:
-- [ ] Model class
 - [ ] Player class (add jump)
+- [ ] Block
+- [ ] BlockImporter

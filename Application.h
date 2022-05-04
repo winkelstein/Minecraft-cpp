@@ -6,6 +6,7 @@
 #include "Engine/GLTK/Shader.h"
 #include "Engine/Model.h"
 #include "Engine/Asset.h"
+#include "Engine/Block/BlockImporter.h"
 
 #ifdef _DEBUG
 #include "Engine/consolelogger.h"
@@ -23,6 +24,7 @@ namespace Minecraft
 		Engine::logger logger;
 		Engine::Player* player;
 		Engine::Asset assets;
+		Engine::BlockImporter* block_importer;
 
 		bool inGame;
 

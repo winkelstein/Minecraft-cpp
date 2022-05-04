@@ -53,7 +53,14 @@ Engine::Model::Model(std::filesystem::path path)
 	this->count = vertices.size() / 5;
 }
 
-Engine::Model::~Model()
+void Engine::Model::draw(gltk::Shader& shader) const
 {
-	glDeleteVertexArrays(1, &this->VAO);
+	shader.bind();
+	shader.uniform<glm::mat4>("model", this->model);
+	Renderer::render(this->VAO, count);
+}
+
+void Engine::Model::position(glm::vec3 pos)
+{
+	this->model = glm::translate(this->model, pos);
 }
