@@ -62,5 +62,5 @@ void Engine::Model::draw(gltk::Shader& shader) const
 
 void Engine::Model::position(glm::vec3 pos)
 {
-	this->model = glm::translate(this->model, pos);
+	this->model = glm::translate(glm::mat4(1.0), pos);
 }

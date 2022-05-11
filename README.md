@@ -22,8 +22,10 @@ Done:
 - [x] Model class
 - [x] Block (haven't done yet)
 - [x] BlockImporter (haven't done yet)
+- [x] World (haven't done yet)
 
 Working on:
 - [ ] Player class (add jump)
 - [ ] Block
 - [ ] BlockImporter
+- [ ] WorldImporter

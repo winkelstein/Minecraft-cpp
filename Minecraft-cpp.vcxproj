@@ -166,6 +166,8 @@
     <ClInclude Include="Engine\Render.h" />
     <ClInclude Include="Engine\Screen.h" />
     <ClInclude Include="Engine\winlogger.h" />
+    <ClInclude Include="Engine\World\World.h" />
+    <ClInclude Include="Engine\World\WorldImporter.h" />
     <ClInclude Include="Engine\WS\Core.h" />
     <ClInclude Include="Engine\WS\Event.h" />
     <ClInclude Include="Engine\WS\Keyboard.h" />
@@ -187,6 +189,7 @@
     <ClCompile Include="Engine\Model.cpp" />
     <ClCompile Include="Engine\Player.cpp" />
     <ClCompile Include="Engine\Screen.cpp" />
+    <ClCompile Include="Engine\World\World.cpp" />
     <ClCompile Include="Engine\WS\Keyboard.cpp" />
     <ClCompile Include="Engine\WS\Mouse.cpp" />
     <ClCompile Include="Engine\WS\Window.cpp" />

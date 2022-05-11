@@ -21,6 +21,7 @@ Minecraft::Application::Application()
 	this->inGame = true;
 
 	this->assets_init();
+	this->world_generate();
 }
 
 Minecraft::Application::~Application()
@@ -32,6 +33,8 @@ Minecraft::Application::~Application()
 
 void Minecraft::Application::run()
 {
+	Engine::gltk::Shader shader = this->assets.get<Engine::gltk::Shader>("test");
+
 	Engine::FPSCounter counter;
 	while (this->window->isOpen())
 	{
@@ -52,6 +55,7 @@ void Minecraft::Application::run()
 
 			//Draw things
 
+			this->screen->push(&this->world, shader);
 			this->screen->render();
 			this->window->swapBuffers();
 			this->window->clearColor(128.0f / 255.0f, 166.0f / 255.0f, 1.0f, 1.0f);
@@ -128,8 +132,22 @@ void Minecraft::Application::assets_init()
 	catch (std::exception& e)
 	{
 		this->logger << Engine::Logger::message("Minecraft Block importer loading", e.what(), Engine::Logger::severity::high);
+		exit(1);
 	}
 	this->logger << Engine::Logger::message("Minecraft Block importer loading", "loaded");
+}
+
+void Minecraft::Application::world_generate()
+{
+	for (int x = 0; x < 100; x++)
+	{
+		for (int z = 0; z < 100; z++)
+		{
+			Engine::Block block = this->block_importer->get("grass");
+			block.position(glm::vec3(x, -2.0, z));
+			this->world.push_block(block);
+		}
+	}
 }
 
 void Minecraft::Application::onAnyEvent(const Engine::WS::Event& ev)
