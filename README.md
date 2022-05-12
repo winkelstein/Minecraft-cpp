@@ -5,7 +5,6 @@ Minecraft with own game engine on C++ using OpenGL.
 Add glew-2.1.0 to third-party directory
 
 ## Releases
-RELEASED Alpha 0.0.1
 This project haven't done yet. All updates before release will be in dev branch.
 
 Done:
