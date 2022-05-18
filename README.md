@@ -1,8 +1,12 @@
 # Minecraft-cpp
 Minecraft with own game engine on C++ using OpenGL.
 
-##
+## Clone
 third-party directory has submodules so you need to recursive clone: git clone --recurse-submodules https://github.com/treug0lnik041/Minecraft-cpp
+
+## Dependencies
+Please, add glew-2.1.0 to third-party directory.
+
 ## Releases
 This project haven't done yet. All updates before release will be in dev branch.
 
