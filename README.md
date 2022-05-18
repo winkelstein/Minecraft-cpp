@@ -1,9 +1,6 @@
 # Minecraft-cpp
 Minecraft with own game engine on C++ using OpenGL.
 
-## Dependencies
-Add glew-2.1.0 to third-party directory
-
 ## Releases
 This project haven't done yet. All updates before release will be in dev branch.
 
