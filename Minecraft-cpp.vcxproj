@@ -202,12 +202,6 @@
   <ItemGroup>
     <Image Include="res\minecraft.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="blocks\cube.mm" />
-    <None Include="README.md" />
-    <None Include="shaders\test\fragment.glsl" />
-    <None Include="shaders\test\vertex.glsl" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
