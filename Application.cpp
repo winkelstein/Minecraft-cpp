@@ -127,6 +127,18 @@ void Minecraft::Application::assets_init()
 
 	try
 	{
+		Engine::gltk::Texture* texture = new Engine::gltk::Texture("blocks/grass.png");
+		this->assets.store("grass", *texture);
+	}
+	catch (std::exception& e)
+	{
+		this->logger << Engine::Logger::message("Minecraft Texture loading", e.what(), Engine::Logger::severity::high);
+		exit(1);
+	}
+	this->logger << Engine::Logger::message("Minecraft Texture loading", "loaded");
+
+	try
+	{
 		this->block_importer = new Engine::BlockImporter(this->assets);
 	}
 	catch (std::exception& e)
@@ -135,13 +147,15 @@ void Minecraft::Application::assets_init()
 		exit(1);
 	}
 	this->logger << Engine::Logger::message("Minecraft Block importer loading", "loaded");
+
+	
 }
 
 void Minecraft::Application::world_generate()
 {
-	for (int x = 0; x < 100; x++)
+	for (int x = 0; x < 1; x++)
 	{
-		for (int z = 0; z < 100; z++)
+		for (int z = 0; z < 1; z++)
 		{
 			Engine::Block block = this->block_importer->get("grass");
 			block.position(glm::vec3(x, -2.0, z));

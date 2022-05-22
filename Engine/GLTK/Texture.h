@@ -13,7 +13,6 @@ namespace Engine
 		{
 		public:
 			Texture(std::filesystem::path path);
-			~Texture();
 
 		public:
 			void active(uint8_t base) const;
