@@ -1,22 +1,20 @@
 #pragma once
-#include <filesystem>
-
-#include "drawable.h"
+#include <vector>
+#include "Mesh.h"
 
 namespace Engine
 {
 	class Model : public drawable
 	{
 	private:
-		GLuint VAO;
-		size_t count;
+		std::vector<std::shared_ptr<const Mesh>> meshes;
 
 		glm::mat4 model;
 	private:
 		static std::vector<float> importModel(std::filesystem::path path);
 		void assemble(std::vector<float> vertices);
 	public:
-		Model(std::filesystem::path path);
+		Model(std::vector<std::shared_ptr<const Mesh>> meshes);
 
 	public:
 		void draw(gltk::Shader& shader) const override;

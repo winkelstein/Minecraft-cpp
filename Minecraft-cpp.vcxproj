@@ -161,6 +161,7 @@
     <ClInclude Include="Engine\GLTK\Texture.h" />
     <ClInclude Include="Engine\GLTK\UniformBuffer.h" />
     <ClInclude Include="Engine\Logger.h" />
+    <ClInclude Include="Engine\Mesh.h" />
     <ClInclude Include="Engine\Model.h" />
     <ClInclude Include="Engine\Player.h" />
     <ClInclude Include="Engine\Render.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="Engine\GLTK\Shader.cpp" />
     <ClCompile Include="Engine\GLTK\Texture.cpp" />
     <ClCompile Include="Engine\Logger.cpp" />
+    <ClCompile Include="Engine\Mesh.cpp" />
     <ClCompile Include="Engine\Model.cpp" />
     <ClCompile Include="Engine\Player.cpp" />
     <ClCompile Include="Engine\Screen.cpp" />

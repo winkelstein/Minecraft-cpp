@@ -33,7 +33,7 @@ Minecraft::Application::~Application()
 
 void Minecraft::Application::run()
 {
-	Engine::gltk::Shader shader = this->assets.get<Engine::gltk::Shader>("test");
+	std::shared_ptr<Engine::gltk::Shader> shader = this->assets.get<std::shared_ptr<Engine::gltk::Shader>>("test");
 
 	Engine::FPSCounter counter;
 	while (this->window->isOpen())
@@ -55,7 +55,7 @@ void Minecraft::Application::run()
 
 			//Draw things
 
-			this->screen->push(&this->world, shader);
+			this->screen->push(&this->world, *shader);
 			this->screen->render();
 			this->window->swapBuffers();
 			this->window->clearColor(128.0f / 255.0f, 166.0f / 255.0f, 1.0f, 1.0f);
@@ -100,8 +100,8 @@ void Minecraft::Application::assets_init()
 {
 	try
 	{
-		Engine::Model* cube = new Engine::Model("blocks/cube.mm");
-		this->assets.store("cube", *cube);
+		std::shared_ptr<Engine::Mesh> cube(new Engine::Mesh("blocks/cube.mm"));
+		this->assets.store<std::shared_ptr<Engine::Mesh>>("cube", cube);
 	}
 	catch (std::exception& e)
 	{
@@ -112,11 +112,11 @@ void Minecraft::Application::assets_init()
 
 	try
 	{
-		Engine::gltk::Shader* shader = new Engine::gltk::Shader;
+		std::shared_ptr<Engine::gltk::Shader> shader(new Engine::gltk::Shader);
 		shader->add(Engine::gltk::Shader::ShaderType::vertex, "shaders/test/vertex.glsl");
 		shader->add(Engine::gltk::Shader::ShaderType::fragment, "shaders/test/fragment.glsl");
 		shader->link();
-		this->assets.store("test", *shader);
+		this->assets.store("test", shader);
 	}
 	catch (std::exception& e)
 	{
@@ -127,8 +127,8 @@ void Minecraft::Application::assets_init()
 
 	try
 	{
-		Engine::gltk::Texture* texture = new Engine::gltk::Texture("blocks/grass.png");
-		this->assets.store("grass", *texture);
+		std::shared_ptr<Engine::gltk::Texture> texture(new Engine::gltk::Texture("blocks/grass.png"));
+		this->assets.store("grass", texture);
 	}
 	catch (std::exception& e)
 	{
@@ -153,12 +153,12 @@ void Minecraft::Application::assets_init()
 
 void Minecraft::Application::world_generate()
 {
-	for (int x = 0; x < 1; x++)
+	for (int x = 0; x < 100; x++)
 	{
-		for (int z = 0; z < 1; z++)
+		for (int z = 0; z < 100; z++)
 		{
 			Engine::Block block = this->block_importer->get("grass");
-			block.position(glm::vec3(x, -2.0, z));
+			block.position(glm::vec3(x, -4.0, z));
 			this->world.push_block(block);
 		}
 	}

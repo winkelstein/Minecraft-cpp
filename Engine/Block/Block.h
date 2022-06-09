@@ -15,12 +15,12 @@ namespace Engine
 
 	private:
 		Model model;
-		gltk::Texture texture;
+		std::shared_ptr<gltk::Texture> texture;
 		BlockType id;
 		
 	private:
 		friend class BlockImporter;
-		Block(BlockType id, Model model, gltk::Texture texture);
+		Block(BlockType id, Model model, std::shared_ptr<gltk::Texture> texture);
 
 	public:
 		void draw(gltk::Shader& shader) const override;
