@@ -96,9 +96,6 @@
     <ClInclude Include="Engine\World\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\World\WorldImporter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>

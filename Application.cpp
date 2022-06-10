@@ -14,7 +14,7 @@ Minecraft::Application::Application()
 	this->logger << Engine::Logger::message("WinAPI", "window has been created");
 
 	glEnable(GL_DEBUG_OUTPUT);
-	glDebugMessageCallback(this->_debugfunc, &this->logger);
+	glDebugMessageCallback(Application::_debugfunc, &this->logger);
 
 	this->player = new Engine::Player("Steve");
 
@@ -35,6 +35,7 @@ void Minecraft::Application::run()
 {
 	std::shared_ptr<Engine::gltk::Shader> shader = this->assets.get<std::shared_ptr<Engine::gltk::Shader>>("test");
 
+
 	Engine::FPSCounter counter;
 	while (this->window->isOpen())
 	{
@@ -54,9 +55,10 @@ void Minecraft::Application::run()
 			this->screen->onUpdateCamera(this->player->camera());
 
 			//Draw things
-
 			this->screen->push(&this->world, *shader);
+
 			this->screen->render();
+
 			this->window->swapBuffers();
 			this->window->clearColor(128.0f / 255.0f, 166.0f / 255.0f, 1.0f, 1.0f);
 			this->window->clear();
@@ -148,14 +150,13 @@ void Minecraft::Application::assets_init()
 	}
 	this->logger << Engine::Logger::message("Minecraft Block importer loading", "loaded");
 
-	
 }
 
 void Minecraft::Application::world_generate()
 {
-	for (int x = 0; x < 100; x++)
+	for (int x = 0; x < 100; x+=4)
 	{
-		for (int z = 0; z < 100; z++)
+		for (int z = 0; z < 100; z+=4)
 		{
 			Engine::Block block = this->block_importer->get("grass");
 			block.position(glm::vec3(x, -4.0, z));

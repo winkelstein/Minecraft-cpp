@@ -29,8 +29,8 @@ namespace Engine
 				WindowCreated             = WM_CREATE,
 
 				//Keyboard events
-				KeyPressed            = WM_KEYDOWN,
-				KeyReleased           = WM_KEYUP
+				KeyPressed                = WM_KEYDOWN,
+				KeyReleased               = WM_KEYUP
 			};
 
 		private:

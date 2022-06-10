@@ -168,7 +168,6 @@
     <ClInclude Include="Engine\Screen.h" />
     <ClInclude Include="Engine\winlogger.h" />
     <ClInclude Include="Engine\World\World.h" />
-    <ClInclude Include="Engine\World\WorldImporter.h" />
     <ClInclude Include="Engine\WS\Core.h" />
     <ClInclude Include="Engine\WS\Event.h" />
     <ClInclude Include="Engine\WS\Keyboard.h" />
