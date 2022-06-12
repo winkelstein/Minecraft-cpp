@@ -16,7 +16,7 @@ Minecraft::Application::Application()
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageCallback(Application::_debugfunc, &this->logger);
 
-	this->player = new Engine::Player("Steve");
+	this->player = std::unique_ptr<Engine::Player>(new Engine::Player("Steve"));
 
 	this->inGame = true;
 
@@ -26,9 +26,6 @@ Minecraft::Application::Application()
 
 Minecraft::Application::~Application()
 {
-	delete this->player;
-	delete this->screen;
-	delete this->window;
 }
 
 void Minecraft::Application::run()
@@ -94,8 +91,8 @@ void Minecraft::Application::_debugfunc(unsigned int source, unsigned int type, 
 
 void Minecraft::Application::window_init(std::string window_name, uint64_t width, uint64_t height)
 {
-	this->window = new Engine::WS::Window(window_name, Engine::WS::Size(width, height), Engine::WS::Position(0, 0));
-	this->screen = new Engine::Screen(Engine::WS::Size(width, height));
+	this->window = std::unique_ptr<Engine::WS::Window>(new Engine::WS::Window(window_name, Engine::WS::Size(width, height), Engine::WS::Position(0, 0)));
+	this->screen = std::unique_ptr<Engine::Screen>(new Engine::Screen(Engine::WS::Size(width, height)));
 }
 
 void Minecraft::Application::assets_init()
@@ -141,7 +138,7 @@ void Minecraft::Application::assets_init()
 
 	try
 	{
-		this->block_importer = new Engine::BlockImporter(this->assets);
+		this->block_importer = std::unique_ptr<Engine::BlockImporter>(new Engine::BlockImporter(this->assets));
 	}
 	catch (std::exception& e)
 	{
