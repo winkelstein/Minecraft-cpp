@@ -96,7 +96,7 @@
     <ClInclude Include="Engine\World\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\World\WorldImporter.h">
+    <ClInclude Include="Engine\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -153,6 +153,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\World\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

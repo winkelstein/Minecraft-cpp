@@ -20,12 +20,12 @@ namespace Minecraft
 	class Application
 	{
 	private:
-		Engine::WS::Window* window;
-		Engine::Screen* screen;
+		std::unique_ptr<Engine::WS::Window> window;
+		std::unique_ptr<Engine::Screen> screen;
+		std::unique_ptr<Engine::Player> player;
+		std::unique_ptr<Engine::BlockImporter> block_importer;
 		Engine::logger logger;
-		Engine::Player* player;
 		Engine::Asset assets;
-		Engine::BlockImporter* block_importer;
 		Engine::World world;
 
 		bool inGame;

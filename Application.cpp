@@ -14,9 +14,9 @@ Minecraft::Application::Application()
 	this->logger << Engine::Logger::message("WinAPI", "window has been created");
 
 	glEnable(GL_DEBUG_OUTPUT);
-	glDebugMessageCallback(this->_debugfunc, &this->logger);
+	glDebugMessageCallback(Application::_debugfunc, &this->logger);
 
-	this->player = new Engine::Player("Steve");
+	this->player = std::unique_ptr<Engine::Player>(new Engine::Player("Steve"));
 
 	this->inGame = true;
 
@@ -26,14 +26,12 @@ Minecraft::Application::Application()
 
 Minecraft::Application::~Application()
 {
-	delete this->player;
-	delete this->screen;
-	delete this->window;
 }
 
 void Minecraft::Application::run()
 {
-	Engine::gltk::Shader shader = this->assets.get<Engine::gltk::Shader>("test");
+	std::shared_ptr<Engine::gltk::Shader> shader = this->assets.get<std::shared_ptr<Engine::gltk::Shader>>("test");
+
 
 	Engine::FPSCounter counter;
 	while (this->window->isOpen())
@@ -54,9 +52,10 @@ void Minecraft::Application::run()
 			this->screen->onUpdateCamera(this->player->camera());
 
 			//Draw things
+			this->screen->push(&this->world, *shader);
 
-			this->screen->push(&this->world, shader);
 			this->screen->render();
+
 			this->window->swapBuffers();
 			this->window->clearColor(128.0f / 255.0f, 166.0f / 255.0f, 1.0f, 1.0f);
 			this->window->clear();
@@ -92,16 +91,16 @@ void Minecraft::Application::_debugfunc(unsigned int source, unsigned int type, 
 
 void Minecraft::Application::window_init(std::string window_name, uint64_t width, uint64_t height)
 {
-	this->window = new Engine::WS::Window(window_name, Engine::WS::Size(width, height), Engine::WS::Position(0, 0));
-	this->screen = new Engine::Screen(Engine::WS::Size(width, height));
+	this->window = std::unique_ptr<Engine::WS::Window>(new Engine::WS::Window(window_name, Engine::WS::Size(width, height), Engine::WS::Position(0, 0)));
+	this->screen = std::unique_ptr<Engine::Screen>(new Engine::Screen(Engine::WS::Size(width, height)));
 }
 
 void Minecraft::Application::assets_init()
 {
 	try
 	{
-		Engine::Model* cube = new Engine::Model("blocks/cube.mm");
-		this->assets.store("cube", *cube);
+		std::shared_ptr<Engine::Mesh> cube(new Engine::Mesh("blocks/cube.mm"));
+		this->assets.store<std::shared_ptr<Engine::Mesh>>("cube", cube);
 	}
 	catch (std::exception& e)
 	{
@@ -112,11 +111,11 @@ void Minecraft::Application::assets_init()
 
 	try
 	{
-		Engine::gltk::Shader* shader = new Engine::gltk::Shader;
+		std::shared_ptr<Engine::gltk::Shader> shader(new Engine::gltk::Shader);
 		shader->add(Engine::gltk::Shader::ShaderType::vertex, "shaders/test/vertex.glsl");
 		shader->add(Engine::gltk::Shader::ShaderType::fragment, "shaders/test/fragment.glsl");
 		shader->link();
-		this->assets.store("test", *shader);
+		this->assets.store("test", shader);
 	}
 	catch (std::exception& e)
 	{
@@ -127,7 +126,19 @@ void Minecraft::Application::assets_init()
 
 	try
 	{
-		this->block_importer = new Engine::BlockImporter(this->assets);
+		std::shared_ptr<Engine::gltk::Texture> texture(new Engine::gltk::Texture("blocks/grass.png"));
+		this->assets.store("grass", texture);
+	}
+	catch (std::exception& e)
+	{
+		this->logger << Engine::Logger::message("Minecraft Texture loading", e.what(), Engine::Logger::severity::high);
+		exit(1);
+	}
+	this->logger << Engine::Logger::message("Minecraft Texture loading", "loaded");
+
+	try
+	{
+		this->block_importer = std::unique_ptr<Engine::BlockImporter>(new Engine::BlockImporter(this->assets));
 	}
 	catch (std::exception& e)
 	{
@@ -135,16 +146,17 @@ void Minecraft::Application::assets_init()
 		exit(1);
 	}
 	this->logger << Engine::Logger::message("Minecraft Block importer loading", "loaded");
+
 }
 
 void Minecraft::Application::world_generate()
 {
-	for (int x = 0; x < 100; x++)
+	for (int x = 0; x < 100; x+=4)
 	{
-		for (int z = 0; z < 100; z++)
+		for (int z = 0; z < 100; z+=4)
 		{
 			Engine::Block block = this->block_importer->get("grass");
-			block.position(glm::vec3(x, -2.0, z));
+			block.position(glm::vec3(x, -4.0, z));
 			this->world.push_block(block);
 		}
 	}

@@ -2,7 +2,9 @@
 
 void Minecraft::EventHandler::onKeyboardInput(const Engine::WS::Event& ev, bool& inGame, Engine::Player& player, Engine::WS::Window& window)
 {
-	if (Engine::WS::Keyboard::isButtonPressed(Engine::WS::Keyboard::VirtualKey::ESC))
+	using namespace Engine::WS;
+
+	if (Engine::WS::Keyboard::isButtonPressed(Keyboard::VirtualKey::ESC))
 	{
 		inGame = !inGame;
 		Engine::WS::Mouse::clip(window, inGame);
@@ -14,10 +16,12 @@ void Minecraft::EventHandler::onKeyboardInput(const Engine::WS::Event& ev, bool&
 
 void Minecraft::EventHandler::onMouseInput(const Engine::WS::Event& ev, bool& inGame, Engine::Player& player)
 {
+	using namespace Engine::WS;
+
 	if (inGame)
 	{
 		player.onMouseInput(ev);
-		Engine::WS::Mouse::position(Engine::WS::Position(ev.window()->size().width / 2.0, ev.window()->size().height / 2.0), *ev.window());
+		Mouse::position(Position(ev.window()->size().width / 2.0, ev.window()->size().height / 2.0), *ev.window());
 	}
 }
 

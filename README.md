@@ -29,6 +29,7 @@ Done:
 - [x] Block (haven't done yet)
 - [x] BlockImporter (haven't done yet)
 - [x] World (haven't done yet)
+- [x] Camera
 
 Working on:
 - [ ] Player class (add jump)

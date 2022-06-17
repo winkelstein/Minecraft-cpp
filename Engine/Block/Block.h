@@ -1,5 +1,6 @@
 #pragma once
 #include "../Model.h"
+#include "../GLTK/Texture.h"
 #include "../drawable.h"
 
 namespace Engine
@@ -14,11 +15,12 @@ namespace Engine
 
 	private:
 		Model model;
+		std::shared_ptr<gltk::Texture> texture;
 		BlockType id;
 		
 	private:
 		friend class BlockImporter;
-		Block(BlockType id, Model model);
+		Block(BlockType id, Model model, std::shared_ptr<gltk::Texture> texture);
 
 	public:
 		void draw(gltk::Shader& shader) const override;
