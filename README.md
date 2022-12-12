@@ -1,5 +1,5 @@
-# Minecraft-cpp
-Minecraft with own game engine on C++ using OpenGL.
+# Minecraft-cpp [FROZEN for a while]
+Minecraft with own game engine on C++ using OpenGL. 
 
 ## Clone
 third-party directory has submodules so you need to recursive clone: 
